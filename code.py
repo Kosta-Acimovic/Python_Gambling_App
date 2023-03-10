@@ -2,7 +2,7 @@ def deposit():
     while True:
         amount=input("Enter what would you like to deposit?\t$")
         if amount.isdigit():
-            amount=float(amount)
+            amount=int(amount)
             if amount>0:
                 break
             else:
@@ -13,3 +13,4 @@ def deposit():
 
 def main():
     balance=deposit()
+main()
