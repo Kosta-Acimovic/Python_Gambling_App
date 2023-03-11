@@ -36,7 +36,7 @@ def get_spins(rows, cols, symbols):
 def print_slot_machine(columns):
     for row in range(len(columns[0])):
         for i, col in enumerate(columns):
-            if i != len(columns - 1):
+            if i != len(columns)-1:
                 print(col[row], "|")
             else:
                 print(col[row])
@@ -70,7 +70,7 @@ def num_of_lines():
     return lines
 
 
-def getBet():
+def get_bet():
     while True:
         bet = input(
             "Enter the value you want to bet on each line, between (" + str(MIN_BET) + " ~ " + str(MAX_BET) + ")?\t$")
@@ -89,12 +89,13 @@ def main():
     balance = deposit()
     lines = num_of_lines()
     while True:
-        bet = getBet()
+        bet = get_bet()
         total_bet = lines * bet
 
         if total_bet > balance:
             print(
-                f"\nYou do not have enough to bet that amount, your current balance is: ${balance} and minimum balance for this bet is {total_bet}\n")
+                f"\nYou do not have enough to bet that amount, your current balance is: ${balance}"
+                f" and minimum balance for this bet is {total_bet}\n")
         else:
             break
     print(f"You are betting {bet}$ on {lines} lines.\n"
