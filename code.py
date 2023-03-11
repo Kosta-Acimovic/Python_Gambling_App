@@ -7,29 +7,41 @@ MIN_BET = 1
 ROWS = 3
 COLS = 3
 
-symbol_count={
-    "A":2,
-    "B":4,
-    "C":6,
-    "D":8
+symbol_count = {
+    "A": 2,
+    "B": 4,
+    "C": 6,
+    "D": 8
 }
 
+
 def get_spins(rows, cols, symbols):
-    all_symvols=[]
+    all_symbols = []
     for symbol, symbol_count in symbols.items():
         for _ in range(symbol_count):
-            all_symvols.append(symbol)
-    columns=[]
+            all_symbols.append(symbol)
+    columns = []
     for _ in range(cols):
-        column=[]
-        curr_symblos = all_symvols[:]
+        column = []
+        curr_symbols = all_symbols[:]
         for _ in range(rows):
-            value = random.choice(curr_symblos)
-            curr_symblos.remove(value)
+            value = random.choice(curr_symbols)
+            curr_symbols.remove(value)
             column.append(value)
 
         columns.append(column)
     return columns
+
+
+def print_slot_machine(columns):
+    for row in range(len(columns[0])):
+        for i, col in enumerate(columns):
+            if i != len(columns - 1):
+                print(col[row], "|")
+            else:
+                print(col[row])
+
+
 def deposit():
     while True:
         amount = input("Enter what would you like to deposit?\t$")
@@ -87,6 +99,8 @@ def main():
             break
     print(f"You are betting {bet}$ on {lines} lines.\n"
           f"Your total bet is equal to: {total_bet}$")
+    slots = get_spins(ROWS, COLS, symbol_count)
+    print_slot_machine(slots)
 
 
 main()
