@@ -29,14 +29,11 @@ def check_winnings(columns, lines, bet, values):
         for col in columns:
             symbol_to_check = col[line]
             if symbol != symbol_to_check:
-                winnings = 0
                 break
-            else:
-                winnings += values[symbol] * bet
-                winning_lines.append(line + 1)
+        else:
+            winnings += values[symbol] * bet
+            winning_lines.append(line + 1)
 
-    if winnings == 0:
-        winning_lines = []
     return winnings, winning_lines
 
 
@@ -65,8 +62,8 @@ def print_slot_machine(columns):
             if i != len(columns) - 1:
                 print(col[row], end=" | ")
             else:
-                print(col[row])
-
+                print(col[row], end="")
+        print()
 
 def deposit():
     while True:
