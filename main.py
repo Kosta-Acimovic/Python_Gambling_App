@@ -1,16 +1,18 @@
-# This is a sample Python script.
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+from  code import *
+balance=deposit()
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+def choose_game():
+    vr = input("Please choose game you want to play:\n"
+               "1\t for SPIN THE MACHINE\n"
+               "2\t for GUESS THE NUMBER\n"
+               "3\t for SPINNING THE CUBE\n"
+               "6\t for LUCKY SIX\n"
+               "Q\t tp QUIT\n\n")
 
+    if vr == "1":
+        main(balance)
+    elif vr == "2":
+        guess_number(balance)
 
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+choose_game()
