@@ -17,11 +17,9 @@ def choose_game():
         elif vr == "2":
             balance = guess_number(balance)
         elif vr == "3":
-            print("Coming Soon\n")
-            continue
+            balance = roll_dice(balance)
         elif vr == "6":
-            print("Coming Soon\n")
-            continue
+            balance = lucky_six(balance)
         elif vr == "Q":
             print(f"Your balance after this whole game is {balance}$\n")
             break

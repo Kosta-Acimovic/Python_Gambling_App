@@ -202,3 +202,13 @@ def guess_number(balance):
             print("U pressed bad key, please try again")
 
     return balance
+
+
+def lucky_six(balance):
+    print("Coming soon")
+    return balance
+
+
+def roll_dice(balance):
+    print("Coming soon")
+    return balance
