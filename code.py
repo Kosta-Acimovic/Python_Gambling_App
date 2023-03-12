@@ -128,8 +128,22 @@ def num_of_lines():
             print("Please enter a number")
     return lines
 
-
 def get_bet():
+    while True:
+        bet = input(
+            "Enter the value you want to bet, between (" + str(MIN_BET) + " ~ " + str(MAX_BET) + ")?\t$")
+        if bet.isdigit():
+            bet = int(bet)
+            if MIN_BET <= bet <= MAX_BET:
+                break
+            else:
+                print(f"Amount must be between {MIN_BET} - {MAX_BET}.")
+        else:
+            print("Please enter a number")
+    return bet
+
+
+def get_bet_line():
     while True:
         bet = input(
             "Enter the value you want to bet on each line, between (" + str(MIN_BET) + " ~ " + str(MAX_BET) + ")?\t$")
@@ -147,7 +161,7 @@ def get_bet():
 def spin(balance):
     lines = num_of_lines()
     while True:
-        bet = get_bet()
+        bet = get_bet_line()
         total_bet = lines * bet
 
         if total_bet > balance:
@@ -236,6 +250,11 @@ def guess_number(balance):
 
 
 def lucky_six(balance):
+    c=input("If you want to go back press Q\n"
+            "Press any other key to play\n")
+    if c == "Q":
+        return balance
+
     bet = get_bet()
     lista = []
     for i in range(1, 49):
@@ -246,15 +265,17 @@ def lucky_six(balance):
     for i in range(0, 6):
         value = check_value()
         while your_vr.__contains__(value):
-            print(f"You have already entered number {value}")
+            print(f"You have already entered number {value}\n")
             value = check_value()
         your_vr.append(value)
+    print("Your combination is:\n")
     your_vr = sortGeneralAsc(your_vr)
 
     for i in range(0, 6):
         value = random.choice(new_lista)
         win_vr.append(value)
         new_lista.remove(value)
+    print("Winning combination is:\n")
     win_vr = sortGeneralAsc(win_vr)
     win = 0
     for i in your_vr:
@@ -265,18 +286,19 @@ def lucky_six(balance):
     print(f"You have guessed right {win} numbers")
     if win == 0:
         balance -= bet
-    if win == 1:
+    elif win == 1:
         balance = balance - (0.5 * bet)
-    if win == 2:
+    elif win == 2:
         balance = balance - (0.25 * bet)
-    if win == 3:
+    elif win == 3:
         balance = balance
-    if win == 4:
+    elif win == 4:
         balance += bet
-    if win == 5:
+    elif win == 5:
         balance = balance + (2.5 * bet)
     else:
         balance = balance + (5 * bet)
+    print(f"Your balance after this game is {balance}$")
     return balance
 
 
