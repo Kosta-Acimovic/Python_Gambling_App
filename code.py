@@ -191,15 +191,13 @@ def guess_number(balance):
     vr = 0
     while balance > 0 and vr != "Q":
         print(f"Current balance is {balance}$")
-        answer = input("Enter   P to play game of guessing numbers.\n"
-                       "Enter   Q to quit\n")
+        answer = input("Enter   Q to quit\n"
+                       "PRESS ANY OTHER KEY TO PLAY\n")
         if answer == "Q":
             print(f"You left with {balance}$")
             break
-        elif answer == "P":
-            balance, vr = dn_prize(balance)
         else:
-            print("U pressed bad key, please try again")
+            balance, vr = dn_prize(balance)
 
     return balance
 

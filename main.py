@@ -9,7 +9,7 @@ def choose_game():
         vr = input("Please choose game you want to play:\n"
                    "1\t for SPIN THE MACHINE\n"
                    "2\t for GUESS THE NUMBER\n"
-                   "3\t for SPINNING THE CUBE\n"
+                   "3\t to ROLL THE DICE\n"
                    "6\t for LUCKY SIX\n"
                    "Q\t tp QUIT\n\n")
         if vr == "1":
@@ -25,6 +25,8 @@ def choose_game():
             break
         else:
             print("You have entered unexciting value please try again\n")
+    if balance <= 0:
+        print("You have no more money\n")
 
 
 choose_game()
