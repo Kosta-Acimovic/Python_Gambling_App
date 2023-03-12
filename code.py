@@ -134,17 +134,17 @@ def spin(balance):
 
 
 def main(balance):
-    while True:
+    answer = input("Enter Q whenever you want to QUIT\n"
+                   "Press any other key to play\n")
+    while balance >= 1 and answer != "Q":
         print(f"Current balance is {balance}$")
-        answer = input("Enter   P to play spin game.\n"
-                       "Enter   Q to quit\n")
+        answer = input("\nPRESS ANY KEY\n")
         if answer == "Q":
             print(f"You left with {balance}$")
-            return None
-        elif answer == "P":
-            balance += spin(balance)
+            break
         else:
-            print("U pressed bad key, please try again")
+            balance += spin(balance)
+    return balance
 
 
 def dn_prize(balance):
@@ -160,47 +160,45 @@ def dn_prize(balance):
     vrr = input("\nIf you want to stop playing at any time just press Q\n"
                 "PRESS ANY OTHER KEY TO START\n\n")
 
-    vr = 0
-    while balance >= 10 and vr != "Q":
-        vr = input("Guess the number to win\n")
-        if vr == "Q":
+    while balance >= 10 and vrr != "Q":
+        vrr = input("Guess the number to win\n")
+        if vrr == "Q":
             print(f"Your current balance after the game is {balance}$")
-            break
-        vr1 = vr.isdigit()
+            return balance, vrr
+        vr1 = vrr.isdigit()
         if not vr1:
             while not vr1:
                 print("Please enter valid number\n\n")
-                vr = input("Guess the number to win\n")
-                vr1 = vr.isdigit()
-        vr = int(vr)
-        if vr == value:
-            balance += 80
+                vrr = input("Guess the number to win\n")
+                vr1 = vrr.isdigit()
+        vrr = int(vrr)
+        if vrr == value:
+            balance += bet1
             print(f"Congratulations you won {bet1}$, now your balance is {balance}$")
-            return balance
+            return balance, vrr
         else:
-            if vr > value:
+            if vrr > value:
                 balance -= 10
-                print(f"Number is lower than value you entered {vr}\n")
+                print(f"Number is lower than value you entered {vrr}\n")
             else:
-                balance -= 10
-                print(f"Number is greater than value you entered {vr}\n")
+                balance -= bet
+                print(f"Number is greater than value you entered {vrr}\n")
 
-    return balance
+    return balance, vrr
 
 
 def guess_number(balance):
-    while True:
+    vr = 0
+    while balance > 0 and vr != "Q":
         print(f"Current balance is {balance}$")
         answer = input("Enter   P to play game of guessing numbers.\n"
                        "Enter   Q to quit\n")
         if answer == "Q":
             print(f"You left with {balance}$")
-            return None
+            break
         elif answer == "P":
-            balance = dn_prize(balance)
+            balance, vr = dn_prize(balance)
         else:
             print("U pressed bad key, please try again")
 
-
-
-
+    return balance
