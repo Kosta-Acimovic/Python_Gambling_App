@@ -23,6 +23,39 @@ symbol_value = {
 }
 
 
+def check_value():
+    value = input("Enter number between 1 and 48 including both of them, without repeating.\t")
+    value1 = value.isdigit()
+    value = int(value)
+    while not value1 or value < 1 or value > 48:
+        print("Please enter number between 1 and 48\n")
+        value = check_value()
+    return value
+
+
+def sortGeneralAsc(lista):
+    c = 5
+    c1 = 0
+    while c >= c1:
+
+        n = 5
+        n1 = 0
+        n2 = n1 + 1
+        for _ in lista:
+            for _ in lista:
+                if n2 <= n:
+                    if lista[n1] > lista[n2]:
+                        pom = lista[n1]
+                        lista[n1] = lista[n2]
+                        lista[n2] = pom
+                    n2 += 1
+                n1 += 1
+
+        c1 += 1
+    print(lista)
+    return lista
+
+
 def check_winnings(columns, lines, bet, values):
     winnings = 0
     winning_lines = []
@@ -203,7 +236,47 @@ def guess_number(balance):
 
 
 def lucky_six(balance):
-    print("Coming soon")
+    bet = get_bet()
+    lista = []
+    for i in range(1, 49):
+        lista.append(i)
+    new_lista = lista[:]
+    win_vr = []
+    your_vr = []
+    for i in range(0, 6):
+        value = check_value()
+        while your_vr.__contains__(value):
+            print(f"You have already entered number {value}")
+            value = check_value()
+        your_vr.append(value)
+    your_vr = sortGeneralAsc(your_vr)
+
+    for i in range(0, 6):
+        value = random.choice(new_lista)
+        win_vr.append(value)
+        new_lista.remove(value)
+    win_vr = sortGeneralAsc(win_vr)
+    win = 0
+    for i in your_vr:
+        for j in win_vr:
+            if i == j:
+                win += 1
+
+    print(f"You have guessed right {win} numbers")
+    if win == 0:
+        balance -= bet
+    if win == 1:
+        balance = balance - (0.5 * bet)
+    if win == 2:
+        balance = balance - (0.25 * bet)
+    if win == 3:
+        balance = balance
+    if win == 4:
+        balance += bet
+    if win == 5:
+        balance = balance + (2.5 * bet)
+    else:
+        balance = balance + (5 * bet)
     return balance
 
 
