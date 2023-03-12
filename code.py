@@ -210,5 +210,31 @@ def lucky_six(balance):
 
 
 def roll_dice(balance):
-    print("Coming soon")
+    vr = 0
+    while balance > 0 and vr != "Q":
+        lista = [1, 2, 3, 4, 5, 6]
+        value = random.choice(lista)
+        vr = input("Press Q to quite\n"
+                   "Press any other key to roll the dice\n\n")
+
+        if vr == "Q":
+            print(f"\nYour balance after this game is {balance}")
+            break
+        else:
+            bet = get_bet()
+            print(f"You rolled number {value}\n")
+            if value == 1:
+                balance -= bet
+            elif value == 2:
+                balance = balance - (0.5 * bet)
+            elif value == 3:
+                balance = balance - (0.25 * bet)
+            elif value == 4:
+                balance = balance + (0.25 * bet)
+            elif value == 5:
+                balance = balance + (0.5 * bet)
+            else:
+                balance += bet
+            print(f"Your new balance is {balance}$\n\n")
+
     return balance
