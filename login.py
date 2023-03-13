@@ -50,7 +50,7 @@ def chang_balance(u, p, bal):
     for j in lista:
         if j.__contains__(k):
             lista.remove(j)
-            c = "\n" + k + bal
+            c = "\n" + k + str(bal)
             lista.append(c)
     f.close()
     p = open("login.txt", "w")
