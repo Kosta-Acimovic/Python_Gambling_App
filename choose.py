@@ -25,23 +25,34 @@ def choose_game(value):
                    "Q\t to QUIT\n\n")
         if vr == "1":
             balance = main(balance)
+            if value != 3:
+                chang_balance(user, pas, balance)
         elif vr == "2":
             balance = guess_number(balance)
+            if value != 3:
+                chang_balance(user, pas, balance)
         elif vr == "3":
             balance = roll_dice(balance)
+            if value != 3:
+                chang_balance(user, pas, balance)
         elif vr == "4":
             balance = russian_roulette(balance)
+            if value != 3:
+                chang_balance(user, pas, balance)
         elif vr == "6":
             balance = lucky_six(balance)
+            if value != 3:
+                chang_balance(user, pas, balance)
         elif vr == "M":
             balance += deposit()
         elif vr == "S":
-            customize()
+            if value != 3:
+                customize()
+            else:
+                print("You are currently on guest account, please log in or sing up to do this\n")
         elif vr == "Q":
             print(f"Your balance after this whole game is {balance}$\n")
-            if value != 3:
-                chang_balance(user, pas, balance)
-                break
+            break
         else:
             print("You have entered unexciting value please try again\n")
     while balance <= 0:

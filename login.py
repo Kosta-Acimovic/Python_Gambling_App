@@ -17,7 +17,7 @@ def login():
             break
     if u == "" or p == "":
         print("Please try again")
-        login()
+        u, p, b = login()
     f.close()
     if us == u and ps == p:
         b = float(b)
@@ -25,7 +25,7 @@ def login():
         return u, p, b
     else:
         print("Please try again")
-        login()
+        u, p, b = login()
     return u, p, b
 
 
@@ -41,16 +41,18 @@ def list_out_of_file():
 
 
 def chang_balance(u, p, bal):
+    vl = "\n"
     f = open("login.txt", "r")
     k = u + " " + p + " "
     lista = []
     bal = float(bal)
     for i in f:
-        lista.append(i)
+        if i != vl:
+            lista.append(i)
     for j in lista:
         if j.__contains__(k):
             lista.remove(j)
-            c = "\n" + k + str(bal)
+            c = k + str(bal) + "\n"
             lista.append(c)
     f.close()
     p = open("login.txt", "w")
