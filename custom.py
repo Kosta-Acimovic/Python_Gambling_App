@@ -1,3 +1,6 @@
+from login import *
+
+
 def check_name(lista):
     while True:
         dec = "'"
@@ -16,8 +19,22 @@ def check_name(lista):
                     print("Username is too short\n")
                     continue
                 else:
-                    print("This username is valid\n")
+                    print("This username is valid, change will happen after next log in\n")
                     return u1
+
+
+def check_pas():
+    dec = "'"
+    dec2 = '"'
+    while True:
+        pas = input("Enter what password you want to have\t")
+        d = len(pas)
+        if d < 8 or pas.__contains__(dec) or pas.__contains__(dec2) or pas.__contains__(" "):
+            print("This password is not valid\n")
+            continue
+        else:
+            print("Password is valid\n")
+            return pas
 
 
 def list_txt():
@@ -29,7 +46,12 @@ def list_txt():
     return lista
 
 
-def change_name(u, p, bal, lista):
+def change_name(lista):
+    lista1 = login()
+    u = lista1[0]
+    p = lista1[1]
+    bal = lista1[2]
+    bal = float(bal)
     u1 = check_name(lista)
     if u == u1:
         print("These usernames are the same\n")
@@ -51,26 +73,76 @@ def change_name(u, p, bal, lista):
     p.close()
 
 
-def customize(u, p, b):
+def change_pas():
+    lista1 = login()
+    u = lista1[0]
+    p = lista1[1]
+    bal = lista1[2]
+    bal = float(bal)
+    p1 = check_pas()
+
+    if p == p1:
+        print("These passwords are the same\n")
+        return
+    f = open("login.txt", "r")
+    k = u + " " + p + " " + str(bal)
+    k1 = u + " " + p1 + " " + str(bal)
+    lista = []
+    for i in f:
+        lista.append(i)
+    for j in lista:
+        if j.__contains__(k):
+            lista.remove(j)
+            lista.append(k1)
+    f.close()
+    p = open("login.txt", "w")
+    for h in lista:
+        p.write(h)
+    p.close()
+
+
+def change_bal1():
+    lista1 = login()
+    u = lista1[0]
+    p = lista1[1]
+    bal = lista1[2]
+    bal = float(bal)
+    bal1 = deposit()
+    f = open("login.txt", "r")
+    k = u + " " + p + " " + str(bal)
+    k1 = u + " " + p + " " + str(bal1)
+    lista = []
+    for i in f:
+        lista.append(i)
+    for j in lista:
+        if j.__contains__(k):
+            lista.remove(j)
+            lista.append(k1)
+    f.close()
+    p = open("login.txt", "w")
+    for h in lista:
+        p.write(h)
+    p.close()
+
+
+def customize():
     lista = list_txt()
-    st = u + " " + p + " " + str(b)
-    print(st)
     while True:
         ch = input("\n\nEnter what do you want to do?\n"
                    "N\t to change name\n"
                    "P\t to change password\n"
-                   "M\t to deposit more money\n\n")
+                   "M\t to deposit more money\n"
+                   "Q\t to quit\n\n")
         if ch == "N":
-            change_name(u, p, b, lista)
+            change_name(lista)
             break
         elif ch == "P":
-            print("P")
+            change_pas()
             break
         elif ch == "M":
             print("M")
             break
         elif ch == "Q":
-            print("Q")
             break
         else:
             print("Bad value, please try again\n")

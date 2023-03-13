@@ -1,10 +1,8 @@
-from login import *
 from custom import *
 
 
 def choose_game(value):
     if value == 1 or value == 2:
-        lista = []
         lista = login()
         user = lista[0]
         pas = lista[1]
@@ -32,7 +30,7 @@ def choose_game(value):
         elif vr == "6":
             balance = lucky_six(balance)
         elif vr == "S":
-            customize(user, pas, balance)
+            customize()
         elif vr == "Q":
             print(f"Your balance after this whole game is {balance}$\n")
             if value != 3:

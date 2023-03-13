@@ -108,7 +108,7 @@ def deposit():
     while True:
         amount = input("Enter what would you like to deposit?\t$")
         if amount.isdigit():
-            amount = int(amount)
+            amount = float(amount)
             if amount > 0:
                 break
             else:

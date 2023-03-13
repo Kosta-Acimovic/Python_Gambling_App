@@ -6,7 +6,6 @@ def login():
     b = 0
     u = ""
     p = ""
-    lista = []
     us = input("Please enter your username:\t")
     ps = input("Please enter your password:\t")
     for i in f:
@@ -45,7 +44,7 @@ def chang_balance(u, p, bal):
     f = open("login.txt", "r")
     k = u + " " + p + " "
     lista = []
-    bal = str(bal)
+    bal = float(bal)
     for i in f:
         lista.append(i)
     for j in lista:
