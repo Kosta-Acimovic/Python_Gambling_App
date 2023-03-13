@@ -4,12 +4,21 @@ from code import *
 def login():
     f = open("login.txt", "r")
     b = 0
+    u = ""
+    p = ""
+    lista = []
     us = input("Please enter your username:\t")
     ps = input("Please enter your password:\t")
     for i in f:
         if i.__contains__(us):
-            u, p, b = i.split()
+            lista = i.split()
+            u = lista[0]
+            p = lista[1]
+            b = lista[2]
             break
+    if u == "" or p == "":
+        print("Please try again")
+        login()
     f.close()
     if us == u and ps == p:
         b = float(b)
@@ -18,6 +27,7 @@ def login():
     else:
         print("Please try again")
         login()
+    return u, p, b
 
 
 def list_out_of_file():
