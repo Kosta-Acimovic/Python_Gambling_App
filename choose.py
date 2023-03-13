@@ -19,6 +19,7 @@ def choose_game(value):
                    "2\t for GUESS THE NUMBER\n"
                    "3\t to ROLL THE DICE\n"
                    "6\t for LUCKY SIX\n"
+                   "M\t to add MONEY\n"
                    "S\t for SETTINGS\n"
                    "Q\t to QUIT\n\n")
         if vr == "1":
@@ -29,6 +30,8 @@ def choose_game(value):
             balance = roll_dice(balance)
         elif vr == "6":
             balance = lucky_six(balance)
+        elif vr == "M":
+            balance += deposit()
         elif vr == "S":
             customize()
         elif vr == "Q":
@@ -43,13 +46,13 @@ def choose_game(value):
         balance = input("Enter how much money you want to deposit:\t")
         balance1 = balance.isdigit()
         if not balance1:
-            print("Bad value\n"
-                  "Goodbye\n")
-            break
-        balance = int(balance)
+            print("Bad value\n")
+            continue
+        balance = float(balance)
         if balance <= 0:
             if value != 3:
                 chang_balance(user, pas, balance)
                 break
+            break
         else:
             choose_game(balance)
