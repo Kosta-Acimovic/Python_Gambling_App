@@ -9,7 +9,7 @@ def choose_game(value):
         user = lista[0]
         pas = lista[1]
         balance = lista[2]
-        balance=float(balance)
+        balance = float(balance)
 
     else:
         balance = deposit()
@@ -43,12 +43,12 @@ def choose_game(value):
     while balance <= 0:
         print("You have no more money\n")
         balance = input("Enter how much money you want to deposit:\t")
-        balance1=balance.isdigit()
+        balance1 = balance.isdigit()
         if not balance1:
             print("Bad value\n"
                   "Goodbye\n")
             break
-        balance=int(balance)
+        balance = int(balance)
         if balance <= 0:
             if value != 3:
                 chang_balance(user, pas, balance)

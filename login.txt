@@ -1,8 +1,6 @@
 adminka adminka 1000000
 Cviiija Cvizlana 843
 Jovana Logistika 436
-
 bukibuki bukibuki 200.0
-tuga12 velikatuga 10
-
 kostadept kostadept 604.0
+tuga12 velikatuga 10.0
