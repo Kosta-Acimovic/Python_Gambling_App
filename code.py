@@ -131,6 +131,7 @@ def num_of_lines():
             print("Please enter a number")
     return lines
 
+
 def get_bet():
     while True:
         bet = input(
@@ -253,8 +254,8 @@ def guess_number(balance):
 
 
 def lucky_six(balance):
-    c=input("If you want to go back press Q\n"
-            "Press any other key to play\n")
+    c = input("If you want to go back press Q\n"
+              "Press any other key to play\n")
     if c == "Q":
         return balance
 

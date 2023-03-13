@@ -1,6 +1,8 @@
 from code import *
 
 
+# IDEAS TO IMPLEMENT POKER,
+
 def choose_game():
     balance = deposit()
     vr = 0
