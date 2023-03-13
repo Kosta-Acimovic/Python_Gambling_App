@@ -101,46 +101,18 @@ def change_pas():
     p.close()
 
 
-def change_bal1():
-    lista1 = login()
-    u = lista1[0]
-    p = lista1[1]
-    bal = lista1[2]
-    bal = float(bal)
-    bal1 = deposit()
-    f = open("login.txt", "r")
-    k = u + " " + p + " " + str(bal)
-    k1 = u + " " + p + " " + str(bal1)
-    lista = []
-    for i in f:
-        lista.append(i)
-    for j in lista:
-        if j.__contains__(k):
-            lista.remove(j)
-            lista.append(k1)
-    f.close()
-    p = open("login.txt", "w")
-    for h in lista:
-        p.write(h)
-    p.close()
-
-
 def customize():
     lista = list_txt()
     while True:
         ch = input("\n\nEnter what do you want to do?\n"
                    "N\t to change name\n"
                    "P\t to change password\n"
-                   "M\t to deposit more money\n"
                    "Q\t to quit\n\n")
         if ch == "N":
             change_name(lista)
             break
         elif ch == "P":
             change_pas()
-            break
-        elif ch == "M":
-            print("M")
             break
         elif ch == "Q":
             break
