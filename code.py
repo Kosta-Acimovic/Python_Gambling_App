@@ -335,3 +335,40 @@ def roll_dice(balance):
             print(f"Your new balance is {balance}$\n\n")
 
     return balance
+
+
+def russian_roulette(balance):
+    lista = [1, 2, 3, 4, 5, 6]
+    value = random.choice(lista)
+    bet = get_bet()
+    while True:
+        vr = input("Enter one out of two options: \n"
+                   "1\t to be first\n"
+                   "2\t to be second\n")
+        vr1 = vr.isdigit()
+        if not vr1:
+            print("Please enter one of those two values\n")
+            continue
+        else:
+            vr = int(vr)
+            if vr == 1:
+                if value % 2 == 1:
+                    print(f"You are dead, and bullet number {value} killed you\n")
+                    balance -= bet
+                else:
+                    print(f"You are alive, your opponent is dead, bullet number {value} killed him\n")
+                    balance += bet
+                break
+            elif vr == 2:
+                if value % 2 == 0:
+                    print(f"You are dead, and bullet number {value} killed you\n")
+                    balance -= bet
+                else:
+                    print(f"You are alive, your opponent is dead, bullet number {value} killed him\n")
+                    balance += bet
+                break
+            else:
+                print("Please enter valid number")
+                continue
+    print(value)
+    return balance

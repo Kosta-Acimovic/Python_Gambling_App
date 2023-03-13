@@ -18,6 +18,7 @@ def choose_game(value):
                    "1\t for SPIN THE MACHINE\n"
                    "2\t for GUESS THE NUMBER\n"
                    "3\t to ROLL THE DICE\n"
+                   "4\t for RUSSIAN ROULETTE\n"
                    "6\t for LUCKY SIX\n"
                    "M\t to add MONEY\n"
                    "S\t for SETTINGS\n"
@@ -28,6 +29,8 @@ def choose_game(value):
             balance = guess_number(balance)
         elif vr == "3":
             balance = roll_dice(balance)
+        elif vr == "4":
+            balance = russian_roulette(balance)
         elif vr == "6":
             balance = lucky_six(balance)
         elif vr == "M":
