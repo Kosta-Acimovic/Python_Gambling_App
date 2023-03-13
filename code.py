@@ -10,8 +10,8 @@ COLS = 3
 symbol_count = {
     "A": 3,
     "B": 4,
-    "C": 6,
-    "D": 7,
+    "C": 5,
+    "D": 6,
     "/": 4
 }
 symbol_value = {
@@ -26,10 +26,13 @@ symbol_value = {
 def check_value():
     value = input("Enter number between 1 and 48 including both of them, without repeating.\t")
     value1 = value.isdigit()
+    if not value1:
+        value = 0
     value = int(value)
     while not value1 or value < 1 or value > 48:
         print("Please enter number between 1 and 48\n")
         value = check_value()
+        break
     return value
 
 
