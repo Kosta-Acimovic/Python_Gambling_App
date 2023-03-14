@@ -33,6 +33,8 @@ def list_out_of_file():
     f = open("login.txt", "r")
     lista = []
     for i in f:
+        if i == "\n" or i == "":
+            continue
         k = i.split()
         k = k[0]
         lista.append(k)
@@ -65,6 +67,8 @@ def add_user(st):
     f = open("login.txt", "r")
     lista = []
     for i in f:
+        if i == "\n" or i == "":
+            continue
         lista.append(i)
     else:
         lista.append(st)

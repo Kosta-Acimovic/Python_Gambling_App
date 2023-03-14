@@ -137,7 +137,7 @@ def get_bet():
         bet = input(
             "Enter the value you want to bet, between (" + str(MIN_BET) + " ~ " + str(MAX_BET) + ")?\t$")
         if bet.isdigit():
-            bet = int(bet)
+            bet = float(bet)
             if MIN_BET <= bet <= MAX_BET:
                 break
             else:
@@ -199,8 +199,7 @@ def main(balance):
 
 
 def dn_prize(balance, bet):
-    print("You have to choose amount of bet, if you win you will get SIX times that amount")
-    bet1 = 6 * bet
+    bet1 = 5 * bet
     print(f"Every wrong guess costs {bet}$\n"
           f"Win brings you {bet1}$\n")
     lista = []
@@ -210,9 +209,9 @@ def dn_prize(balance, bet):
     print("\nIf you want to stop playing at any time just press Q\n")
 
     while True:
-        vrr = input("Guess the number to win\t")
+        vrr = input("Guess the number to win between 0 and 100 including both\t")
         if vrr == "Q":
-            print(f"Your current balance after the game is {balance}$")
+            print(f"Your current balance after the game is {balance}$\n")
             break
         vr1 = vrr.isdigit()
         if not vr1:
@@ -223,33 +222,24 @@ def dn_prize(balance, bet):
         vrr = int(vrr)
         if vrr == value:
             balance += bet1
-            print(f"Congratulations you won {bet1}$, now your balance is {balance}$")
+            print(f"Congratulations you won {bet1}$, now your balance is {balance}$\n")
             break
         else:
             if vrr > value:
                 balance -= 10
                 print(f"Number is lower than value you entered {vrr}\n")
                 if balance < bet:
-                    print(f"You don`t have enough money, bet is {bet}$ and you have {balance}$\n")
                     break
             else:
                 balance -= bet
                 print(f"Number is greater than value you entered {vrr}\n")
                 if balance < bet:
-                    print(f"You don`t have enough money, bet is {bet}$ and you have {balance}$\n")
                     break
 
     return balance
 
 
 def guess_number(balance):
-    bet = 0
-    while True:
-        if balance <= bet:
-            print(f"You don`t have enough money, bet is {bet}$ and you have {balance}$\n")
-            continue
-        else:
-            break
     while True:
         while True:
             bet = get_bet()
@@ -259,17 +249,17 @@ def guess_number(balance):
             else:
                 break
 
-        print(f"Current balance is {balance}$")
-        answer = input("Enter   Q to quit\n")
+        print(f"Current balance is {balance}$\n")
+        answer = input("Enter   Q to quit\n"
+                       "Any other key to play\n")
         if answer == "Q":
             print(f"Your balance after this game is {balance}$\n")
             break
         else:
             balance = dn_prize(balance, bet)
             if balance == 0:
-                print("You don`t have any more money\n")
+                print(f"You don`t have enough money, bet is {bet}$ and you have {balance}$\n")
                 break
-
     return balance
 
 
@@ -313,7 +303,7 @@ def lucky_six(balance):
             if i == j:
                 win += 1
 
-    print(f"You have guessed right {win} numbers")
+    print(f"You have guessed right {win} numbers\n")
     if win == 0:
         balance -= bet
     elif win == 1:
@@ -328,11 +318,12 @@ def lucky_six(balance):
         balance = balance + (2.5 * bet)
     else:
         balance = balance + (5 * bet)
-    print(f"Your balance after this game is {balance}$")
+    print(f"Your balance after this game is {balance}$\n")
     return balance
 
 
 def roll_dice(balance):
+    bet=0
     while True:
         lista = [1, 2, 3, 4, 5, 6]
         value = random.choice(lista)
@@ -344,6 +335,15 @@ def roll_dice(balance):
             break
         else:
             bet = get_bet()
+            if bet > balance > 0:
+                print(f"Please enter another bet, because your current balance is {balance}$ and your bet is {bet}$\n")
+                continue
+            elif balance < bet and balance <= 0:
+                return balance
+
+            if balance <= 0:
+                return balance
+
             if balance < bet:
                 print(f"You don`t have enough money, bet is {bet}$ and you have {balance}$\n")
                 continue
@@ -484,9 +484,14 @@ def better_card(balance):
         elif ch == "Q":
             print(f"Your balance after this game is {balance}$\n")
             break
-        else:
-            print("\nPlease enter valid option\n")
+        if bet > balance > 0:
+            print(f"Please enter another bet in next game, because your current balance is {balance}$ and your last bet is {bet}$\n")
             continue
+        elif balance < bet and balance <= 0:
+            return balance
+
+        if balance <= 0:
+            return balance
 
     return balance
 
