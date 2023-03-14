@@ -12,14 +12,15 @@ def choose_game(value):
     else:
         balance = deposit()
     vr = 0
-
     while balance > 0 and vr != "Q":
         vr = input("Please choose game you want to play:\n"
                    "1\t for SPIN THE MACHINE\n"
                    "2\t for GUESS THE NUMBER\n"
                    "3\t to ROLL THE DICE\n"
                    "4\t for RUSSIAN ROULETTE\n"
+                   "5\t for game BETTER CARD WINS\n"
                    "6\t for LUCKY SIX\n"
+                   "7\t for ROULETTE\n"
                    "M\t to add MONEY\n"
                    "S\t for SETTINGS\n"
                    "Q\t to QUIT\n\n")
@@ -39,8 +40,16 @@ def choose_game(value):
             balance = russian_roulette(balance)
             if value != 3:
                 chang_balance(user, pas, balance)
+        elif vr == "5":
+            balance = better_card(balance)
+            if value != 3:
+                chang_balance(user, pas, balance)
         elif vr == "6":
             balance = lucky_six(balance)
+            if value != 3:
+                chang_balance(user, pas, balance)
+        elif vr == "7":
+            balance = roulette(balance)
             if value != 3:
                 chang_balance(user, pas, balance)
         elif vr == "M":

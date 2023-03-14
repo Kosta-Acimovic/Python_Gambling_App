@@ -1,7 +1,6 @@
 from choose import *
 
 
-# IDEAS TO IMPLEMENT POKER, BLACKJACK, GRCKI KINO
 def gambling():
     while True:
         vr = input("Please type one of the following:\n"

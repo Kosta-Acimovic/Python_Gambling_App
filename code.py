@@ -370,5 +370,59 @@ def russian_roulette(balance):
             else:
                 print("Please enter valid number")
                 continue
-    print(value)
+    return balance
+
+
+def better_card(balance):
+    while True:
+        while True:
+            lista1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+            vr11 = random.choice(lista1)
+            vr12 = random.choice(lista1)
+            vr111 = str(vr11)
+            vr122 = str(vr12)
+            lista2 = ["\u2764\ufe0f", "\U0001F340", "\u2666", "\u2663\uFE0F"]
+            vr21 = random.choice(lista2)
+            vr22 = random.choice(lista2)
+            vr1 = vr111 + vr21
+            vr2 = vr122 + vr22
+            if vr1 == vr2:
+                continue
+            else:
+                break
+        ch = input("Choose which card do you want\n"
+                   "1\t for first one\n"
+                   "2\t for second one\n"
+                   "Q\t to quit\n")
+        bet = get_bet()
+        if ch == "1":
+            if vr11 > vr12:
+                print("Your card " + vr1 + " is better than enemy card " + vr2)
+                balance += bet
+            elif vr11 < vr12:
+                print("Enemy card " + vr2 + " is better than your card " + vr1)
+                balance -= bet
+            else:
+                print("These cards have same value" + vr1, vr2)
+        elif ch == "2":
+            if vr12 > vr11:
+                print("Your card " + vr2 + " is better than enemy card " + vr1)
+                balance += bet
+            elif vr12 < vr11:
+                print("Enemy card " + vr1 + " is better than your card " + vr2)
+                balance -= bet
+            else:
+                print("These cards have same value" + vr1, vr2)
+                break
+        elif ch == "Q":
+            break
+        else:
+            print("Please enter valid option\n")
+            continue
+
+    return balance
+
+
+def roulette(balance):
+    print("Coming soon\n")
     return balance
