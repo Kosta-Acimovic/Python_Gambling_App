@@ -53,7 +53,11 @@ def choose_game(value):
             if value != 3:
                 chang_balance(user, pas, balance)
         elif vr == "M":
-            balance += deposit()
+            if value != 3:
+                balance += deposit()
+                chang_balance(user, pas, balance)
+            else:
+                print("You are currently on guest account, please log in or sing up to do this\n")
         elif vr == "S":
             if value != 3:
                 customize()

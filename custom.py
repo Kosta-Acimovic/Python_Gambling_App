@@ -41,7 +41,11 @@ def list_txt():
     f = open("login.txt", "r")
     lista = []
     for i in f:
-        lista.append(i)
+        if i == "" or i == "\n":
+            continue
+        k = i.split()
+        d = k[0]
+        lista.append(d)
     f.close()
     return lista
 
