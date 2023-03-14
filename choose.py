@@ -66,16 +66,17 @@ def choose_game(value):
             print("You have entered unexciting value please try again\n")
     while balance <= 0:
         print("You have no more money\n")
-        balance = input("Enter how much money you want to deposit:\t")
-        balance1 = balance.isdigit()
-        if not balance1:
-            print("Bad value\n")
-            continue
-        balance = float(balance)
-        if balance <= 0:
+        balance1 = input("Chose option:\n"
+                         "1 to deposit money\n"
+                         "Q to quit\n")
+        if balance1 == "1":
+            balance = deposit()
+            choose_game(balance)
+        elif balance1 == "Q":
             if value != 3:
                 chang_balance(user, pas, balance)
                 break
             break
         else:
-            choose_game(balance)
+            print("Please enter valid option\n")
+            continue

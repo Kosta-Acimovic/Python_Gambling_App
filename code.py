@@ -185,9 +185,9 @@ def spin(balance):
 
 
 def main(balance):
-    answer = input("Enter Q whenever you want to QUIT\n"
-                   "Press any other key to play\n")
-    while balance >= 1 and answer != "Q":
+    print("Enter Q whenever you want to QUIT\n"
+          "Press any other key to play\n")
+    while True:
         print(f"Current balance is {balance}$")
         answer = input("\nPRESS ANY KEY\n")
         if answer == "Q":
@@ -198,9 +198,8 @@ def main(balance):
     return balance
 
 
-def dn_prize(balance):
+def dn_prize(balance, bet):
     print("You have to choose amount of bet, if you win you will get SIX times that amount")
-    bet = get_bet()
     bet1 = 6 * bet
     print(f"Every wrong guess costs {bet}$\n"
           f"Win brings you {bet1}$\n")
@@ -208,14 +207,13 @@ def dn_prize(balance):
     for i in range(0, 101):
         lista.append(i)
     value = random.choice(lista)
-    vrr = input("\nIf you want to stop playing at any time just press Q\n"
-                "PRESS ANY OTHER KEY TO START\n\n")
+    print("\nIf you want to stop playing at any time just press Q\n")
 
-    while balance >= 10 and vrr != "Q":
-        vrr = input("Guess the number to win\n")
+    while True:
+        vrr = input("Guess the number to win\t")
         if vrr == "Q":
             print(f"Your current balance after the game is {balance}$")
-            return balance, vrr
+            break
         vr1 = vrr.isdigit()
         if not vr1:
             while not vr1:
@@ -226,29 +224,51 @@ def dn_prize(balance):
         if vrr == value:
             balance += bet1
             print(f"Congratulations you won {bet1}$, now your balance is {balance}$")
-            return balance, vrr
+            break
         else:
             if vrr > value:
                 balance -= 10
                 print(f"Number is lower than value you entered {vrr}\n")
+                if balance < bet:
+                    print(f"You don`t have enough money, bet is {bet}$ and you have {balance}$\n")
+                    break
             else:
                 balance -= bet
                 print(f"Number is greater than value you entered {vrr}\n")
+                if balance < bet:
+                    print(f"You don`t have enough money, bet is {bet}$ and you have {balance}$\n")
+                    break
 
-    return balance, vrr
+    return balance
 
 
 def guess_number(balance):
-    vr = 0
-    while balance > 0 and vr != "Q":
+    bet = 0
+    while True:
+        if balance <= bet:
+            print(f"You don`t have enough money, bet is {bet}$ and you have {balance}$\n")
+            continue
+        else:
+            break
+    while True:
+        while True:
+            bet = get_bet()
+            if balance < bet:
+                print(f"You don`t have enough money, bet is {bet}$ and you have {balance}$\n")
+                continue
+            else:
+                break
+
         print(f"Current balance is {balance}$")
-        answer = input("Enter   Q to quit\n"
-                       "PRESS ANY OTHER KEY TO PLAY\n")
+        answer = input("Enter   Q to quit\n")
         if answer == "Q":
-            print(f"You left with {balance}$")
+            print(f"Your balance after this game is {balance}$\n")
             break
         else:
-            balance, vr = dn_prize(balance)
+            balance = dn_prize(balance, bet)
+            if balance == 0:
+                print("You don`t have any more money\n")
+                break
 
     return balance
 
@@ -257,9 +277,15 @@ def lucky_six(balance):
     c = input("If you want to go back press Q\n"
               "Press any other key to play\n")
     if c == "Q":
+        print(f"Your balance after this game is {balance}$\n")
         return balance
-
-    bet = get_bet()
+    while True:
+        bet = get_bet()
+        if balance < bet:
+            print(f"You don`t have enough money, bet is {bet}$ and you have {balance}$\n")
+            continue
+        else:
+            break
     lista = []
     for i in range(1, 49):
         lista.append(i)
@@ -307,8 +333,7 @@ def lucky_six(balance):
 
 
 def roll_dice(balance):
-    vr = 0
-    while balance > 0 and vr != "Q":
+    while True:
         lista = [1, 2, 3, 4, 5, 6]
         value = random.choice(lista)
         vr = input("Press Q to quite\n"
@@ -319,6 +344,9 @@ def roll_dice(balance):
             break
         else:
             bet = get_bet()
+            if balance < bet:
+                print(f"You don`t have enough money, bet is {bet}$ and you have {balance}$\n")
+                continue
             print(f"You rolled number {value}\n")
             if value == 1:
                 balance -= bet
@@ -332,7 +360,7 @@ def roll_dice(balance):
                 balance = balance + (0.5 * bet)
             else:
                 balance += bet
-            print(f"Your new balance is {balance}$\n\n")
+            print(f"Your balance after this game is {balance}$\n\n")
 
     return balance
 
@@ -340,8 +368,11 @@ def roll_dice(balance):
 def russian_roulette(balance):
     lista = [1, 2, 3, 4, 5, 6]
     value = random.choice(lista)
-    bet = get_bet()
     while True:
+        bet = get_bet()
+        if balance < bet:
+            print(f"You don`t have enough money, bet is {bet}$ and you have {balance}$\n")
+            continue
         vr = input("Enter one out of two options: \n"
                    "1\t to be first\n"
                    "2\t to be second\n")
@@ -373,19 +404,45 @@ def russian_roulette(balance):
     return balance
 
 
+def check_better_card(vr1, vr2, vr):
+    vv1 = "Jack"
+    vv2 = "Queen"
+    vv3 = "King"
+    vv4 = "Ace"
+    if vr1 == 11:
+        vr1 = vv1
+        vr = vr1 + vr2
+        return vr
+    elif vr1 == 12:
+        vr1 = vv2
+        vr = vr1 + vr2
+        return vr
+    elif vr1 == 13:
+        vr1 = vv3
+        vr = vr1 + vr2
+        return vr
+    elif vr1 == 14:
+        vr1 = vv4
+        vr = vr1 + vr2
+        return vr
+    else:
+        return vr
+
+
 def better_card(balance):
     while True:
         while True:
-            lista1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
+            lista1 = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
             vr11 = random.choice(lista1)
             vr12 = random.choice(lista1)
             vr111 = str(vr11)
             vr122 = str(vr12)
-            lista2 = ["\u2764\ufe0f", "\U0001F340", "\u2666", "\u2663\uFE0F"]
+            lista2 = [" \u2764\ufe0f", " \U0001F340", " \u2666", " \u2663\uFE0F"]
             vr21 = random.choice(lista2)
             vr22 = random.choice(lista2)
             vr1 = vr111 + vr21
             vr2 = vr122 + vr22
+
             if vr1 == vr2:
                 continue
             else:
@@ -395,29 +452,40 @@ def better_card(balance):
                    "2\t for second one\n"
                    "Q\t to quit\n")
         bet = get_bet()
+        if balance < bet:
+            print(f"You don`t have enough money, bet is {bet}$ and you have {balance}$\n")
+            continue
         if ch == "1":
             if vr11 > vr12:
-                print("Your card " + vr1 + " is better than enemy card " + vr2)
+                vr1 = check_better_card(vr11, vr21, vr1)
+                vr2 = check_better_card(vr12, vr21, vr2)
+                print("\nYour card\t" + vr1 + "\nIs better than enemy card\t" + vr2 + "\n")
                 balance += bet
             elif vr11 < vr12:
-                print("Enemy card " + vr2 + " is better than your card " + vr1)
+                vr1 = check_better_card(vr11, vr21, vr1)
+                vr2 = check_better_card(vr12, vr21, vr2)
+                print("\nEnemy card\t" + vr2 + "\nIs better than your card\t" + vr1 + "\n")
                 balance -= bet
             else:
-                print("These cards have same value" + vr1, vr2)
+                print("\nThese cards have same value\t" + vr1 + "\t" + vr2 + "\n")
         elif ch == "2":
             if vr12 > vr11:
-                print("Your card " + vr2 + " is better than enemy card " + vr1)
+                vr1 = check_better_card(vr11, vr21, vr1)
+                vr2 = check_better_card(vr12, vr21, vr2)
+                print("\nYour card\t" + vr2 + "\nIs better than enemy card\t" + vr1 + "\n")
                 balance += bet
             elif vr12 < vr11:
-                print("Enemy card " + vr1 + " is better than your card " + vr2)
+                vr1 = check_better_card(vr11, vr21, vr1)
+                vr2 = check_better_card(vr12, vr21, vr2)
+                print("\nEnemy card\t" + vr1 + "\nIs better than your card\t" + vr2 + "\n")
                 balance -= bet
             else:
-                print("These cards have same value" + vr1, vr2)
-                break
+                print("\nThese cards have same value\t" + vr1 + "\t" + vr2 + "\n")
         elif ch == "Q":
+            print(f"Your balance after this game is {balance}$\n")
             break
         else:
-            print("Please enter valid option\n")
+            print("\nPlease enter valid option\n")
             continue
 
     return balance
