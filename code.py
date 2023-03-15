@@ -498,6 +498,47 @@ def better_card(balance):
 
 
 def roulette(balance):
-    # TODO: Dodati rulet
-    print("Coming soon\n")
+    while True:
+        ch = input("Do you want to play\n"
+                   "Q + Enter to quit\n"
+                   "Any other key or/and Enter to play\n")
+        if ch == "Q":
+            print(f"Your balance is {balance}\n")
+            break
+        else:
+            bet = get_bet()
+            if bet > balance:
+                print(f"You have entered {bet} while you have {balance}\n")
+                continue
+            lista = []
+            lista_red = [1, 27, 25, 12, 19, 18, 21, 16, 23, 14, 9, 30, 7, 32, 5, 34, 3, 36]
+            lista_black = [10, 29, 8, 31, 6, 33, 4, 35, 2, 28, 26, 11, 20, 17, 22, 15, 24, 13]
+            while True:
+                op = input("Choose which roulette you want to play\n"
+                           "E\t for European\n"
+                           "A\t for American\n")
+                if op == "E":
+                    lista.append(0)
+                    break
+                elif op == "A":
+                    lista.append(0)
+                    lista.append(0.0)
+                    break
+                else:
+                    print("Please enter valid option\n")
+                    continue
+            for i in lista_red:
+                lista.append(i)
+            for j in lista_black:
+                lista.append(j)
+
+            value = random.choice(lista)
+            color = ""
+            if lista_black.__contains__(value):
+                color = "black"
+            elif lista_red.__contains__(value):
+                color = "red"
+            else:
+                color = "green"
+
     return balance
