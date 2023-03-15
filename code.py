@@ -497,25 +497,30 @@ def better_card(balance):
     return balance
 
 
-def check_roulette(tr, trc, trn, op, troe, balance, bet):
+def check_roulette(tr, trc, trn, op, troe, balance, bet1):
     v = 37
     if op == "A":
         v = 38
     for i in trc:
         if tr.__contains__(i):
-            balance += bet
+            if i == "red" or i == "black":
+                balance = balance + (0.5 * bet1)
+            else:
+                balance += bet1
         else:
-            balance = balance - (0.5 * bet)
+            balance = balance - (0.5 * bet1)
+
     for j in troe:
         if tr.__contains__(j):
-            balance += bet
+            balance += bet1
         else:
-            balance -= bet
+            balance -= bet1
+
     for k in trn:
         if tr.__contains__(k):
-            balance += bet
+            balance += bet1
         else:
-            balance = balance - ((1 / v) * bet)
+            balance = balance - ((1 / v) * bet1)
 
     return balance
 
@@ -549,8 +554,9 @@ def roulette(balance):
                     lista.append(0)
                     break
                 elif op == "A":
+                    print("Instead having 0 and 00, this roulette will have 0 and 0\n")
                     lista.append(0)
-                    lista.append(0.0)
+                    lista.append(0)
                     break
                 else:
                     print("Please enter valid option\n")
@@ -649,19 +655,25 @@ def roulette(balance):
                         continue
                     else:
                         c = int(c)
-                    if trn.__contains__(c):
-                        print("You can`t chose same option more times\n")
-                        continue
-                    else:
-                        trn.append(c)
-                        tr.append(c)
-                        print("Your choice is saved\n")
-                        continue
+                        if c < 0 or c > 36:
+                            print("Please enter number between 0 and 36\n")
+                            continue
+                        else:
+                            if trn.__contains__(c):
+                                print("You can`t chose same option more times\n")
+                                continue
+                            else:
+                                trn.append(c)
+                                tr.append(c)
+                                print("Your choice is saved\n")
+                                continue
         print(f"Your choices are {tr}\n")
+        ka = len(tr)
+        bet1 = bet / ka
         tr1.append(value)
         tr1.append(oe)
         tr1.append(color)
-        balance = check_roulette(tr1, trc, trn, op, troe, balance, bet)
+        balance = check_roulette(tr1, trc, trn, op, troe, balance, bet1)
         print("Winning combination is:\n"
               f"Winning number is:\t {value}\n"
               f"Number is:\t {oe}\n"
