@@ -13,7 +13,7 @@ def choose_game(value):
         balance = deposit()
     vr = 0
     while balance > 0 and vr != "Q":
-        vr = input("Please choose game you want to play:\n"
+        vr = input("\n\nPlease choose game you want to play:\n"
                    "1\t for SPIN THE MACHINE\n"
                    "2\t for GUESS THE NUMBER\n"
                    "3\t to ROLL THE DICE\n"
@@ -26,49 +26,65 @@ def choose_game(value):
                    "Q\t to QUIT\n\n")
         if vr == "1":
             balance = main(balance)
-            if value != 3:
+            if value == 3:
+                continue
+            else:
                 chang_balance(user, pas, balance)
         elif vr == "2":
             balance = guess_number(balance)
-            if value != 3:
+            if value == 3:
+                continue
+            else:
                 chang_balance(user, pas, balance)
         elif vr == "3":
             balance = roll_dice(balance)
-            if value != 3:
+            if value == 3:
+                continue
+            else:
                 chang_balance(user, pas, balance)
         elif vr == "4":
             balance = russian_roulette(balance)
-            if value != 3:
+            if value == 3:
+                continue
+            else:
                 chang_balance(user, pas, balance)
         elif vr == "5":
             balance = better_card(balance)
-            if value != 3:
+            if value == 3:
+                continue
+            else:
                 chang_balance(user, pas, balance)
         elif vr == "6":
             balance = lucky_six(balance)
-            if value != 3:
+            if value == 3:
+                continue
+            else:
                 chang_balance(user, pas, balance)
         elif vr == "7":
             balance = roulette(balance)
-            if value != 3:
+            if value == 3:
+                continue
+            else:
                 chang_balance(user, pas, balance)
         elif vr == "M":
-            if value != 3:
+            if value == 3:
+                print("You are currently on guest account, please log in or sing up to do this\n")
+                continue
+            else:
                 balance += deposit()
                 chang_balance(user, pas, balance)
-            else:
-                print("You are currently on guest account, please log in or sing up to do this\n")
         elif vr == "S":
-            if value != 3:
-                customize()
-            else:
+            if value == 3:
                 print("You are currently on guest account, please log in or sing up to do this\n")
+                continue
+            else:
+                customize()
         elif vr == "Q":
             print(f"Your balance after this whole game is {balance}$\n")
             break
         else:
             print("You have entered unexciting value please try again\n")
-    while balance <= 0:
+    while balance < 1:
         print("You have no more money\n")
         balance1 = input("Chose option:\n"
                          "1 to deposit money\n"

@@ -165,6 +165,8 @@ def get_bet_line():
 def spin(balance):
     lines = num_of_lines()
     while True:
+        if balance < 1:
+            break
         bet = get_bet_line()
         total_bet = lines * bet
 
@@ -172,29 +174,31 @@ def spin(balance):
             print(
                 f"\nYou do not have enough to bet that amount, your current balance is: ${balance}"
                 f" and minimum balance for this bet is {total_bet}\n")
+            continue
         else:
-            break
-    print(f"You are betting {bet}$ on {lines} lines.\n"
-          f"Your total bet is equal to: {total_bet}$")
-    slots = get_spins(ROWS, COLS, symbol_count)
-    print_slot_machine(slots)
-    winnings, winning_lines = check_winnings(slots, lines, bet, symbol_value)
-    print(f"You won {winnings}$")
-    print(f"You won on lines: ", *winning_lines)
-    return winnings - total_bet
+            print(f"You are betting {bet}$ on {lines} lines.\n"
+                  f"Your total bet is equal to: {total_bet}$\n")
+            slots = get_spins(ROWS, COLS, symbol_count)
+            print_slot_machine(slots)
+            winnings, winning_lines = check_winnings(slots, lines, bet, symbol_value)
+            print(f"You won {winnings}$")
+            print(f"You won on lines: ", *winning_lines)
+            balance = balance + winnings - total_bet
+            return balance
+    return balance
 
 
 def main(balance):
-    print("Enter Q whenever you want to QUIT\n"
-          "Press any other key to play\n")
     while True:
         print(f"Current balance is {balance}$")
+        if balance < 1:
+            break
         answer = input("\nPRESS ANY KEY\n")
         if answer == "Q":
             print(f"You left with {balance}$")
             break
         else:
-            balance += spin(balance)
+            balance = spin(balance)
     return balance
 
 
@@ -241,6 +245,9 @@ def dn_prize(balance, bet):
 
 def guess_number(balance):
     while True:
+        if balance < 1:
+            print("You don`t have enough money, please deposit some amount to play\n")
+            break
         while True:
             bet = get_bet()
             if balance < bet:
@@ -288,15 +295,15 @@ def lucky_six(balance):
             print(f"You have already entered number {value}\n")
             value = check_value()
         your_vr.append(value)
-    print("Your combination is:\n")
-    your_vr = sortGeneralAsc(your_vr)
+    print("\nYour combination is:\n"
+          f"{your_vr}\n")
 
-    for i in range(0, 6):
+    for i in range(0, 35):
         value = random.choice(new_lista)
         win_vr.append(value)
         new_lista.remove(value)
-    print("Winning combination is:\n")
-    win_vr = sortGeneralAsc(win_vr)
+    print("Winning combination is:\n"
+          f"{win_vr}\n")
     win = 0
     for i in your_vr:
         for j in win_vr:
@@ -324,6 +331,10 @@ def lucky_six(balance):
 
 def roll_dice(balance):
     while True:
+        if balance < 1:
+            print("You don`t have enough money, please deposit some amount to play\n")
+            break
+
         lista = [1, 2, 3, 4, 5, 6]
         value = random.choice(lista)
         vr = input("Press Q to quite\n"
@@ -337,10 +348,10 @@ def roll_dice(balance):
             if bet > balance > 0:
                 print(f"Please enter another bet, because your current balance is {balance}$ and your bet is {bet}$\n")
                 continue
-            elif balance < bet and balance <= 0:
+            elif balance < bet and balance < 1:
                 return balance
 
-            if balance <= 0:
+            if balance < 1:
                 return balance
 
             if balance < bet:
@@ -368,6 +379,9 @@ def russian_roulette(balance):
     lista = [1, 2, 3, 4, 5, 6]
     value = random.choice(lista)
     while True:
+        if balance < 1:
+            print("You don`t have enough money, please deposit some amount to play\n")
+            break
         bet = get_bet()
         if balance < bet:
             print(f"You don`t have enough money, bet is {bet}$ and you have {balance}$\n")
@@ -429,7 +443,11 @@ def check_better_card(vr1, vr2, vr):
 
 
 def better_card(balance):
+    bet = 0
     while True:
+        if balance < 1:
+            print("You don`t have enough money, please deposit some amount to play\n")
+            break
         while True:
             lista1 = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
             vr11 = random.choice(lista1)
@@ -450,11 +468,17 @@ def better_card(balance):
                    "1\t for first one\n"
                    "2\t for second one\n"
                    "Q\t to quit\n")
-        bet = get_bet()
-        if balance < bet:
-            print(f"You don`t have enough money, bet is {bet}$ and you have {balance}$\n")
-            continue
+        if balance < 1:
+            print("You don`t have enough money, please deposit some amount to play\n")
+            break
+
         if ch == "1":
+
+            bet = get_bet()
+            if balance < bet:
+                print(f"You don`t have enough money, bet is {bet}$ and you have {balance}$\n")
+                continue
+
             if vr11 > vr12:
                 vr1 = check_better_card(vr11, vr21, vr1)
                 vr2 = check_better_card(vr12, vr21, vr2)
@@ -468,6 +492,12 @@ def better_card(balance):
             else:
                 print("\nThese cards have same value\t" + vr1 + "\t" + vr2 + "\n")
         elif ch == "2":
+
+            bet = get_bet()
+            if balance < bet:
+                print(f"You don`t have enough money, bet is {bet}$ and you have {balance}$\n")
+                continue
+
             if vr12 > vr11:
                 vr1 = check_better_card(vr11, vr21, vr1)
                 vr2 = check_better_card(vr12, vr21, vr2)
@@ -488,12 +518,6 @@ def better_card(balance):
                 f"Please enter another bet in next game, because your current balance is {balance}$ and your last bet "
                 f"is {bet}$\n")
             continue
-        elif balance < bet and balance <= 0:
-            return balance
-
-        if balance <= 0:
-            return balance
-
     return balance
 
 
@@ -532,6 +556,9 @@ def roulette(balance):
     trn = []
     troe = []
     while True:
+        if balance < 1:
+            print("You don`t have enough money, please deposit some amount to play\n")
+            break
         ch = input("Do you want to play\n"
                    "Q + Enter to quit\n"
                    "Any other key or/and Enter to play\n")
@@ -566,7 +593,9 @@ def roulette(balance):
                 lista.append(i)
             for j in lista_black:
                 lista.append(j)
-
+            if balance < 1:
+                print("You don`t have enough money, please deposit some amount to play\n")
+                break
             value = random.choice(lista)
             if lista_black.__contains__(value):
                 color = "black"
