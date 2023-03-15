@@ -498,6 +498,10 @@ def better_card(balance):
 
 
 def roulette(balance):
+    tr = []
+    value = 0
+    color = " "
+    oe = " "
     while True:
         ch = input("Do you want to play\n"
                    "Q + Enter to quit\n"
@@ -533,7 +537,6 @@ def roulette(balance):
                 lista.append(j)
 
             value = random.choice(lista)
-            color = ""
             if lista_black.__contains__(value):
                 color = "black"
             elif lista_red.__contains__(value):
@@ -541,4 +544,95 @@ def roulette(balance):
             else:
                 color = "green"
 
+
+            if value%2 == 0:
+                oe = "even"
+            else:
+                oe = "odd"
+            while True:
+                r = input("You can choose from multiple choices now:\n"
+                          "C\t to bet on COLOR\n"
+                          "PO\t to bet on PARITY/ODDITY\n"
+                          "N\t to bet on color NUMBER\n"
+                          "F\t when you are finished\n")
+
+                if r == "F":
+                    break
+                elif r == "C":
+                    c = input("Choose color you want to bet on\n"
+                              "R\t for Red\n"
+                              "B\t for Black\n"
+                              "G\t for Green\n")
+                    if c == "R":
+                        if tr.__contains__("red"):
+                            print("You can`t chose same option more times\n")
+                            continue
+                        else:
+                            tr.append("red")
+                            print("Your choice is saved\n")
+                            continue
+                    elif c == "B":
+                        if tr.__contains__("black"):
+                            print("You can`t chose same option more times\n")
+                            continue
+                        else:
+                            tr.append("black")
+                            print("Your choice is saved\n")
+                            continue
+                    elif c == "G":
+                        if tr.__contains__("green"):
+                            print("You can`t chose same option more times\n")
+                            continue
+                        else:
+                            tr.append("green")
+                            print("Your choice is saved\n")
+                            continue
+                    else:
+                        print("Please enter valid option\n")
+                        continue
+                elif r == "PO":
+                    c = input("Choose on what you want to bet on\n"
+                              "O\t for Odd number\n"
+                              "E\t for Even number\n")
+                    if c == "O":
+                        if tr.__contains__("odd"):
+                            print("You can`t chose same option more times\n")
+                            continue
+                        else:
+                            tr.append("odd")
+                            print("Your choice is saved\n")
+                            continue
+                    elif c == "E":
+                        if tr.__contains__("even"):
+                            print("You can`t chose same option more times\n")
+                            continue
+                        else:
+                            tr.append("even")
+                            print("Your choice is saved\n")
+                            continue
+                    else:
+                        print("Please enter valid option\n")
+                        continue
+                elif r == "N":
+                    c = input("Choose Number you want to bet on\t")
+                    c1 = c.isdigit()
+                    if not c1:
+                        print("Please enter valid number\n")
+                        continue
+                    else:
+                        c = int(c)
+                    if tr.__contains__(c):
+                        print("You can`t chose same option more times\n")
+                        continue
+                    else:
+                        tr.append(c)
+                        print("Your choice is saved\n")
+                        continue
+        print(f"Your choices are {tr}\n")
+
+
+        print("Winning combination is:\n"
+              f"Winning number is:\t {value}\n"
+              f"Number is:\t {oe}\n"
+              f"Color of this number is\t {color}\n")
     return balance
