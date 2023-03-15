@@ -554,9 +554,10 @@ def roulette(balance):
                     lista.append(0)
                     break
                 elif op == "A":
-                    print("Instead having 0 and 00, this roulette will have 0 and 0\n")
+                    print("Instead having 0 and 00, this roulette will have 0 and 37 (this number will be the same as "
+                          "00)\n")
                     lista.append(0)
-                    lista.append(0)
+                    lista.append(37)
                     break
                 else:
                     print("Please enter valid option\n")
@@ -655,8 +656,8 @@ def roulette(balance):
                         continue
                     else:
                         c = int(c)
-                        if c < 0 or c > 36:
-                            print("Please enter number between 0 and 36\n")
+                        if c < 0 or c > 37:
+                            print("Please enter number between 0 and 37\n")
                             continue
                         else:
                             if trn.__contains__(c):

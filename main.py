@@ -3,6 +3,7 @@ from choose import *
 
 def gambling():
     while True:
+        print("\n\nWelcome to KOSTABET, we hope that you will have great time with us\n\n")
         vr = input("Please type one of the following:\n"
                    "1\t if you already have an account\n"
                    "2\t if you want to create an account\n"
