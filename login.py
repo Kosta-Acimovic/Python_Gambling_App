@@ -2,30 +2,33 @@ from code import *
 
 
 def login():
-    f = open("login.txt", "r")
+    u = " "
+    p = " "
     b = 0
-    u = ""
-    p = ""
-    us = input("Please enter your username:\t")
-    ps = input("Please enter your password:\t")
-    for i in f:
-        if i.__contains__(us):
-            lista = i.split()
-            u = lista[0]
-            p = lista[1]
-            b = lista[2]
+    while True:
+        f = open("login.txt", "r")
+        us = input("Please enter your username:\t")
+        ps = input("Please enter your password:\t")
+        for i in f:
+            if i.__contains__(us):
+                lista = i.split()
+                u = lista[0]
+                p = lista[1]
+                b = lista[2]
+                break
+            else:
+                continue
+        if u == "" or p == "":
+            print("Try again\n")
+            continue
+        f.close()
+        if us == u and ps == p:
+            b = float(b)
+            print(f"Your balance is {b}$\n")
             break
-    if u == "" or p == "":
-        print("Please try again")
-        u, p, b = login()
-    f.close()
-    if us == u and ps == p:
-        b = float(b)
-        print(f"Your balance is {b}$\n")
-        return u, p, b
-    else:
-        print("Please try again")
-        u, p, b = login()
+        else:
+            print("Please try again\n")
+            continue
     return u, p, b
 
 

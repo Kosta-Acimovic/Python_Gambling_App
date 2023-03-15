@@ -323,7 +323,6 @@ def lucky_six(balance):
 
 
 def roll_dice(balance):
-    bet=0
     while True:
         lista = [1, 2, 3, 4, 5, 6]
         value = random.choice(lista)
@@ -485,7 +484,9 @@ def better_card(balance):
             print(f"Your balance after this game is {balance}$\n")
             break
         if bet > balance > 0:
-            print(f"Please enter another bet in next game, because your current balance is {balance}$ and your last bet is {bet}$\n")
+            print(
+                f"Please enter another bet in next game, because your current balance is {balance}$ and your last bet "
+                f"is {bet}$\n")
             continue
         elif balance < bet and balance <= 0:
             return balance
@@ -497,5 +498,6 @@ def better_card(balance):
 
 
 def roulette(balance):
+    # TODO: Dodati rulet
     print("Coming soon\n")
     return balance
