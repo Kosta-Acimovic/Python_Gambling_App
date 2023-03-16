@@ -112,9 +112,9 @@ def deposit():
             if amount > 0:
                 break
             else:
-                print("Amount must be greater than 0.")
+                print("Amount must be greater than 0.\n")
         else:
-            print("Please enter a number")
+            print("Please enter a number.\n")
     return amount
 
 
@@ -136,14 +136,15 @@ def get_bet():
     while True:
         bet = input(
             "Enter the value you want to bet, between (" + str(MIN_BET) + " ~ " + str(MAX_BET) + ")?\t$")
+        print("\n")
         if bet.isdigit():
             bet = float(bet)
             if MIN_BET <= bet <= MAX_BET:
                 break
             else:
-                print(f"Amount must be between {MIN_BET} - {MAX_BET}.")
+                print(f"Amount must be between {MIN_BET} - {MAX_BET}.\n")
         else:
-            print("Please enter a number")
+            print("Please enter a number\n")
     return bet
 
 
@@ -220,7 +221,7 @@ def dn_prize(balance, bet):
         vr1 = vrr.isdigit()
         if not vr1:
             while not vr1:
-                print("Please enter valid number\n\n")
+                print("Please enter valid number\n")
                 vrr = input("Guess the number to win\n")
                 vr1 = vrr.isdigit()
         vrr = int(vrr)
@@ -246,7 +247,7 @@ def dn_prize(balance, bet):
 def guess_number(balance):
     while True:
         if balance < 1:
-            print("You don`t have enough money, please deposit some amount to play\n")
+            print("\nYou don`t have enough money, please deposit some amount to play\n")
             break
         while True:
             bet = get_bet()
@@ -332,16 +333,16 @@ def lucky_six(balance):
 def roll_dice(balance):
     while True:
         if balance < 1:
-            print("You don`t have enough money, please deposit some amount to play\n")
+            print("\nYou don`t have enough money, please deposit some amount to play\n")
             break
 
         lista = [1, 2, 3, 4, 5, 6]
         value = random.choice(lista)
-        vr = input("Press Q to quite\n"
-                   "Press any other key to roll the dice\n\n")
+        vr = input("Press Q to quit\n"
+                   "Press any other key to roll the dice\n")
 
         if vr == "Q":
-            print(f"\nYour balance after this game is {balance}")
+            print(f"\nYour balance after this game is {balance}$\n")
             break
         else:
             bet = get_bet()
@@ -370,50 +371,58 @@ def roll_dice(balance):
                 balance = balance + (0.5 * bet)
             else:
                 balance += bet
-            print(f"Your balance after this game is {balance}$\n\n")
+            print(f"Your balance after this game is {balance}$\n")
 
     return balance
 
 
 def russian_roulette(balance):
-    lista = [1, 2, 3, 4, 5, 6]
-    value = random.choice(lista)
     while True:
+        lista = [1, 2, 3, 4, 5, 6]
+        value = random.choice(lista)
         if balance < 1:
-            print("You don`t have enough money, please deposit some amount to play\n")
+            print("\nYou don`t have enough money, please deposit some amount to play\n")
             break
-        bet = get_bet()
-        if balance < bet:
-            print(f"You don`t have enough money, bet is {bet}$ and you have {balance}$\n")
-            continue
-        vr = input("Enter one out of two options: \n"
+
+        vr = input("\nEnter one out of two options: \n"
                    "1\t to be first\n"
-                   "2\t to be second\n")
+                   "2\t to be second\n"
+                   "Q\t to quit\n")
         vr1 = vr.isdigit()
+        if vr == "Q":
+            print(f"Your balance after this game is {balance}$\n")
+            break
         if not vr1:
             print("Please enter one of those two values\n")
             continue
         else:
             vr = int(vr)
+            bet = get_bet()
+            if balance < bet:
+                print(f"You don`t have enough money, bet is {bet}$ and you have {balance}$\n")
+                continue
             if vr == 1:
                 if value % 2 == 1:
                     print(f"You are dead, and bullet number {value} killed you\n")
                     balance -= bet
+                    continue
                 else:
                     print(f"You are alive, your opponent is dead, bullet number {value} killed him\n")
                     balance += bet
-                break
+                continue
             elif vr == 2:
                 if value % 2 == 0:
                     print(f"You are dead, and bullet number {value} killed you\n")
                     balance -= bet
+                    continue
                 else:
                     print(f"You are alive, your opponent is dead, bullet number {value} killed him\n")
                     balance += bet
-                break
-            else:
-                print("Please enter valid number")
                 continue
+            else:
+                print("Please enter valid number\n")
+                continue
+
     return balance
 
 
@@ -446,7 +455,7 @@ def better_card(balance):
     bet = 0
     while True:
         if balance < 1:
-            print("You don`t have enough money, please deposit some amount to play\n")
+            print("\nYou don`t have enough money, please deposit some amount to play\n")
             break
         while True:
             lista1 = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]
@@ -464,13 +473,13 @@ def better_card(balance):
                 continue
             else:
                 break
+        if balance < 1:
+            print("You don`t have enough money, please deposit some amount to play\n")
+            break
         ch = input("Choose which card do you want\n"
                    "1\t for first one\n"
                    "2\t for second one\n"
                    "Q\t to quit\n")
-        if balance < 1:
-            print("You don`t have enough money, please deposit some amount to play\n")
-            break
 
         if ch == "1":
 
@@ -557,18 +566,18 @@ def roulette(balance):
     troe = []
     while True:
         if balance < 1:
-            print("You don`t have enough money, please deposit some amount to play\n")
+            print("\nYou don`t have enough money, please deposit some amount to play\n")
             break
         ch = input("Do you want to play\n"
                    "Q + Enter to quit\n"
                    "Any other key or/and Enter to play\n")
         if ch == "Q":
-            print(f"Your balance is {balance}\n")
+            print(f"Your balance is {balance}$\n")
             break
         else:
             bet = get_bet()
             if bet > balance:
-                print(f"You have entered {bet} while you have {balance}\n")
+                print(f"You have entered {bet}$ while you have {balance}$\n")
                 continue
             lista = []
             lista_red = [1, 27, 25, 12, 19, 18, 21, 16, 23, 14, 9, 30, 7, 32, 5, 34, 3, 36]
@@ -709,4 +718,101 @@ def roulette(balance):
               f"Number is:\t {oe}\n"
               f"Color of this number is\t {color}\n"
               f"Your balance now is\t {balance}\n")
+    return balance
+
+
+def r_p_s_value(vr):
+    if vr == "rock":
+        vr = "\U0001FAA8"
+    elif vr == "paper":
+        vr = "\U0001F4C3"
+    else:
+        vr = "\U00002702"
+    return vr
+
+
+def r_p_s(balance):
+    while True:
+        if balance < 1:
+            print("\nYou don`t have enough money, please deposit some amount to play\n")
+            break
+        while True:
+            lista = ["rock", "paper", "scissors"]
+            vr = random.choice(lista)
+            k = r_p_s_value(vr)
+            if balance < 1:
+                print("You don`t have enough money, please deposit some amount to play\n")
+                break
+            ch = input("Choose which option do you want\n"
+                       "R\t for the ROCK\n"
+                       "P\t for the PAPER\n"
+                       "S\t for the SCISSORS\n"
+                       "Q\t to quit\n")
+            if ch == "Q":
+                print(f"Your balance after this game is {balance}$\n")
+                break
+            elif ch == "R":
+                bet = get_bet()
+                if balance < bet:
+                    print(f"You don`t have enough money, bet is {bet}$ and you have {balance}$\n")
+                    continue
+                vr1 = "rock"
+                k1 = r_p_s_value(vr1)
+                if vr == vr1:
+                    print("Match ended as a draw, both contestants chose , " + k + "\n")
+                    balance = balance
+                    continue
+                elif vr == "paper":
+                    print("You lost, you have " + k1 + " while your enemy have " + k + "\n")
+                    balance -= bet
+                    continue
+                else:
+                    print("You won, you have " + k1 + " while your enemy have " + k + "\n")
+                    balance += bet
+                    continue
+            elif ch == "P":
+                bet = get_bet()
+                if balance < bet:
+                    print(f"You don`t have enough money, bet is {bet}$ and you have {balance}$\n")
+                    continue
+                vr1 = "paper"
+                k1 = r_p_s_value(vr1)
+                if vr == vr1:
+                    print("Match ended as a draw, both contestants chose , " + k + "\n")
+                    balance = balance
+                    continue
+                elif vr == "scissors":
+                    print("You lost, you have " + k1 + " while your enemy have " + k + "\n")
+                    balance -= bet
+                    continue
+                else:
+                    print("You won, you have " + k1 + " while your enemy have " + k + "\n")
+                    balance += bet
+                    continue
+            elif ch == "S":
+                bet = get_bet()
+                if balance < bet:
+                    print(f"You don`t have enough money, bet is {bet}$ and you have {balance}$\n")
+                    continue
+                vr1 = "scissors"
+                k1 = r_p_s_value(vr1)
+                if vr == vr1:
+                    print("Match ended as a draw, both contestants draw, " + k + "\n")
+                    balance = balance
+                    continue
+                elif vr == "rock":
+                    print("You lost, you have " + k1 + " while your enemy have " + k + "\n")
+                    balance -= bet
+                    continue
+                else:
+                    print("You won, you have " + k1 + " while your enemy have " + k + "\n")
+                    balance += bet
+                    continue
+            else:
+                print("Please enter a valid option\n")
+                continue
+        return balance
+
+def poker(balance):
+    print("Coming Soon")
     return balance

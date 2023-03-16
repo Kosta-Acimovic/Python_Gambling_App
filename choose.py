@@ -21,6 +21,8 @@ def choose_game(value):
                    "5\t for game BETTER CARD WINS\n"
                    "6\t for LUCKY SIX\n"
                    "7\t for ROULETTE\n"
+                   "8\t for ROCK PAPER SCISSORS\n"
+                   "9\t for POKER\n"
                    "M\t to add MONEY\n"
                    "S\t for SETTINGS\n"
                    "Q\t to QUIT\n\n")
@@ -62,6 +64,18 @@ def choose_game(value):
                 chang_balance(user, pas, balance)
         elif vr == "7":
             balance = roulette(balance)
+            if value == 3:
+                continue
+            else:
+                chang_balance(user, pas, balance)
+        elif vr == "8":
+            balance = r_p_s(balance)
+            if value == 3:
+                continue
+            else:
+                chang_balance(user, pas, balance)
+        elif vr == "9":
+            balance = poker(balance)
             if value == 3:
                 continue
             else:
